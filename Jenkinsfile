@@ -9,11 +9,11 @@ pipeline {
                 echo 'build'
                 script {
                     if (params.ENV == "release") {
-                        withCredentials([usernamePassword(credentialsId: 'iti-aswan-dockerhub', usernameVariable: 'USERNAME_ITI', passwordVariable: 'PASSWORD_ITI')]) {
+                        withCredentials([usernamePassword(credentialsId: 'iti-aswan-dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh """
-                                docker login -u ${USERNAME_ITI}  -p ${PASSWORD_ITI}
-                                docker build -t ${USERNAME_ITI}/iti-aswan-bakehouse:${BUILD_NUMBER} .
-                                docker push ${USERNAME_ITI}/iti-aswan-bakehouse:${BUILD_NUMBER}
+                                docker login -u ${USERNAME}  -p ${PASSWORD}
+                                docker build -t ${USERNAME}/iti-aswan-bakehouse:${BUILD_NUMBER} .
+                                docker push ${USERNAME}/iti-aswan-bakehouse:${BUILD_NUMBER}
                                 echo ${BUILD_NUMBER} > ../bakehouse-build-number.txt
                             """
                         }
