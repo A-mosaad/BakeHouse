@@ -26,7 +26,7 @@ pipeline {
                 echo 'deploy'
                 script {
                     if (params.ENV == "dev" || params.ENV == "test"  || params.ENV == "prod"  ) {
-                        withCredentials([file(credentialsId: 'iti-kubeconfig', variable: 'KUBECONFIG')]) {
+                        withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                             sh """
                                 export BUILD_NUMBER=\$(cat ../bakehouse-build-number.txt)
                                 mv Deployment/deploy.yaml Deployment/deploy.yaml.tmp
